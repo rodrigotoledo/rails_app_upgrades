@@ -1,0 +1,2 @@
+$("<%= escape_javascript(render @movie) %>").prependTo("#movies");
+$("#<%= dom_id(Movie.new) %>").replaceWith("<%=escape_javascript(render partial: 'movies/form', locals: {movie: Movie.new})%>");

@@ -1,0 +1,39 @@
+<div id="<%=dom_id(movie)%>">
+  <%= form_for(movie, class: 'contents', remote: true) do |form| %>
+    <% if movie.errors.any? %>
+      <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-bold rounded mt-3">
+        <h2><%= pluralize(movie.errors.count, "error") %> prohibited this movie from being saved:</h2>
+
+        <ul>
+          <% movie.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="my-5">
+      <%= form.label :title %>
+      <%= form.text_field :title, class: "block shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-full" %>
+    </div>
+
+    <h2 class="text-2xl font-bold">Actors</h2>
+    <div id="actors">
+      <%= form.fields_for :actors do |actor_fields| %>
+        <%= render partial: "actor_fields", locals: { f: actor_fields } %>
+      <% end %>
+    </div>
+
+    <!-- Inserted elements will be injected before that target. -->
+    <div data-nested-form-target="target"></div>
+
+    <div class="inline">
+      <%= form.submit class: "rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer" %>
+      <%= link_to_add_association 'Add Actor', form, :actors, class: 'rounded-lg py-3 px-5 bg-blue-600 text-white inline-block font-medium cursor-pointer' %>
+      <% unless movie.new_record? %>
+      <%= link_to "Cancel", movie, remote: true, class: 'rounded-lg py-3 px-5 bg-gray-500 text-white font-medium' %>
+      <%= link_to "Destroy", movie_path(movie), method: :delete, data: {confirm: "Are you sure?"}, remote: true, class: 'rounded-lg py-3 px-5 bg-red-500 text-white font-medium' %>
+      <% end %>
+    </div>
+  <% end %>
+</div>

@@ -1,0 +1,1 @@
+$("#<%= dom_id(@movie) %>").replaceWith("<%=escape_javascript(render partial: 'movies/movie', locals: {movie: @movie})%>");
