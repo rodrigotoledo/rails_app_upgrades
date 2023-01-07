@@ -3,7 +3,12 @@ class MoviesController < ApplicationController
 
   # GET /movies or /movies.json
   def index
-    @movies = Movie.order(created_at: :desc)
+    if params[:q]
+      @movies = Movie.where('title like ?', "%#{params[:q]}%").order(created_at: :desc)
+      render @movies
+    else
+      @movies = Movie.order(created_at: :desc)
+    end
   end
 
   # GET /movies/1 or /movies/1.json
