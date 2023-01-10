@@ -4,7 +4,7 @@ class MoviesController < ApplicationController
   # GET /movies or /movies.json
   def index
     if params[:q]
-      @movies = Movie.where('title like ?', "%#{params[:q]}%").order(created_at: :desc)
+      @movies = Movie.where('title ilike ?', "%#{params[:q]}%").order(created_at: :desc)
       render @movies
     else
       @movies = Movie.order(created_at: :desc)

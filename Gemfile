@@ -65,3 +65,4 @@ gem "cocoon"
 
 gem 'dotenv', '~> 2.1', '>= 2.1.1'
 gem 'dotenv-rails', require: 'dotenv/rails-now'
+gem 'faker'
